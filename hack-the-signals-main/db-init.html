@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Database Initialization - Hack The Signals</title>
+
+    <!-- Load stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="neon-effects.css" />
+
+    <style>
+        .init-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--accent-color);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(74, 222, 128, 0.1);
+        }
+
+        .init-title {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .init-description {
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+        }
+
+        .init-button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--accent-color);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .init-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .init-button:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+
+        .status-container {
+            margin-top: 30px;
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+
+        .status-message.info {
+            background-color: rgba(0, 123, 255, 0.1);
+            border: 1px solid #0d6efd;
+            color: #0d6efd;
+        }
+
+        .status-message.success {
+            background-color: rgba(25, 135, 84, 0.1);
+            border: 1px solid #198754;
+            color: #198754;
+        }
+
+        .status-message.error {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: 1px solid #dc3545;
+            color: #dc3545;
+        }
+
+        .admin-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background-color: var(--accent-color);
+            color: #000;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-link:hover {
+            background-color: var(--accent-hover);
+            text-decoration: none;
+        }
+
+        .warning {
+            background-color: rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffc107;
+            color: #ffc107;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div id="app"></div>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/IEEE_Logo.svg/120px-IEEE_Logo.svg.png" alt="IEEE Logo" />
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Initialization Section -->
+    <section class="init-section">
+        <div class="container">
+            <div class="init-container">
+                <h2 class="init-title">Database Initialization</h2>
+
+                <div class="warning">
+                    <strong>Warning:</strong> This page should only be used once to initialize the database. Running this multiple times will create duplicate data.
+                </div>
+
+                <div class="init-description">
+                    <p>This page will set up the database for the Hack The Signals website. It will:</p>
+                    <ul>
+                        <li>Create an admin user with the provided credentials</li>
+                        <li>Set up the necessary database collections</li>
+                        <li>Create sample data for testing</li>
+                    </ul>
+                </div>
+
+                <form id="init-form">
+                    <div class="form-group">
+                        <label for="admin-email">Admin Email</label>
+                        <input type="email" id="admin-email" required placeholder="Enter admin email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="admin-password">Admin Password</label>
+                        <input type="password" id="admin-password" required placeholder="Enter admin password (min 6 characters)" minlength="6">
+                    </div>
+
+                    <button type="submit" id="init-button" class="init-button">Initialize Database</button>
+                </form>
+
+                <div class="status-container">
+                    <div id="status-message" class="status-message info">
+                        Ready to initialize database. Fill in the form and click the button above.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Firebase scripts -->
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+    <!-- Load scripts -->
+    <script type="module" src="neon-cursor.js"></script>
+    <script type="module" src="db-init.js"></script>
+    <script type="module" src="db-checker.js"></script>
+
+    <!-- Navigation links -->
+    <div style="position: fixed; bottom: 10px; right: 10px; z-index: 1000;">
+        <a href="test-connection.html" class="btn btn-outline btn-sm" style="font-size: 0.8rem; padding: 5px 10px; margin-right: 10px;">Test Connection</a>
+        <a href="index.html" class="btn btn-outline btn-sm" style="font-size: 0.8rem; padding: 5px 10px;">Home</a>
+    </div>
+</body>
+</html>

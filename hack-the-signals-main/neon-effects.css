@@ -1,0 +1,436 @@
+/*
+==============================================
+FILE: neon-effects.css
+==============================================
+DESCRIPTION:
+Provides neon dark green effects for the Hack The Signals website.
+This file enforces dark mode and adds futuristic neon styling to elements.
+
+CONNECTIONS:
+- Loaded by index.html after styles.css
+- Overrides some styles from styles.css to enforce dark mode
+- Works with animations.css for animated neon effects
+- Some effects are triggered by JavaScript in animations.js
+
+SECTIONS IN THIS FILE:
+1. Neon color variables
+2. Neon text effects
+3. Neon border effects
+4. Neon button effects
+5. Section-specific neon styling
+6. Dark mode enforcement
+7. Futuristic background patterns
+==============================================
+*/
+
+/* Neon Dark Green Effects for Hack The Signals - Dark Mode Only */
+
+:root {
+    /* Softer neon green for better visibility */
+    --neon-green: #4ade80;
+    --neon-green-glow: 0 0 5px rgba(74, 222, 128, 0.5), 0 0 10px rgba(74, 222, 128, 0.3);
+
+    /* Slightly darker green for less intense elements */
+    --neon-dark-green: #22c55e;
+    --neon-dark-green-glow: 0 0 5px rgba(34, 197, 94, 0.4), 0 0 10px rgba(34, 197, 94, 0.2);
+
+    /* Pure black background colors */
+    --bg-dark: #000000;
+    --bg-dark-secondary: #000000;
+    --text-light: #f0f0f0;
+    --text-light-secondary: #cccccc;
+}
+
+/* Subtle Neon text effect */
+.neon-text {
+    color: var(--neon-green);
+    text-shadow: 0 0 3px rgba(74, 222, 128, 0.3);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Subtle Neon border effect */
+.neon-border {
+    border: 5px solid var(--neon-green);
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.neon-border::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(57, 255, 20, 0.2), transparent);
+    z-index: -1;
+    animation: neonSweep 3s infinite;
+}
+
+@keyframes neonSweep {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* Subtle Neon button effect */
+.neon-btn {
+    background-color: rgba(0, 0, 0, 0.2); /* Increased opacity for better visibility */
+    color: #000(--neon-green);
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Increased glow */
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.neon-btn:hover {
+    background-color: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Apply subtle neon effect to section titles */
+.section-title {
+    color: var(--neon-green);
+    text-shadow: 0 0 3px rgba(74, 222, 128, 0.2);
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    padding: 0 15px;
+    width: 100%;
+    text-align: center;
+}
+
+.section-title::before, .section-title::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30px;
+    height: 2px;
+    background-color: var(--neon-green);
+    box-shadow: 0 0 2px rgba(74, 222, 128, 0.2);
+}
+
+.section-title::before {
+    left: -40px;
+}
+
+.section-title::after {
+    right: -40px;
+}
+
+/* Apply subtle neon effect to timeline */
+.timeline::before {
+    background-color: var(--neon-green);
+    box-shadow: 0 0 3px rgba(74, 222, 128, 0.3);
+    opacity: 0.5;
+    animation: neonPulse 2s infinite;
+}
+
+.timeline-item {
+    border-left: 3px solid var(--neon-dark-green);
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.2);
+    background-color: rgba(30, 30, 30, 0.8);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.3);
+}
+
+.timeline-item::before {
+    background-color: var(--neon-dark-green);
+    box-shadow: 0 0 3px rgba(34, 197, 94, 0.2);
+    z-index: 2;
+}
+
+.highlight-item {
+    border-left: 4px solid var(--neon-green);
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    background-color: rgba(74, 222, 128, 0.05);
+}
+
+/* Apply subtle neon effect to countdown boxes */
+.time-box {
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.time-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+}
+
+.time-number {
+    color: var(--neon-green);
+    text-shadow: 0 0 3px rgba(74, 222, 128, 0.3);
+    font-weight: bold;
+    font-size: 2.5rem;
+}
+
+.time-label {
+    color: var(--text-light);
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* Apply subtle neon effect to pricing cards */
+.pricing-card {
+    border: 2px solid var(--neon-dark-green);
+    box-shadow: 0 0 5px rgba(34, 197, 94, 0.2);
+    background-color: rgba(0, 0, 0, 0.7);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.3);
+}
+
+.pricing-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(74, 222, 128, 0.05) 0%, transparent 70%);
+    z-index: -1;
+}
+
+.pricing-card h3 {
+    color: var(--neon-green);
+    text-shadow: 0 0 2px rgba(74, 222, 128, 0.2);
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.pricing-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--neon-green);
+    box-shadow: 0 0 2px rgba(74, 222, 128, 0.2);
+}
+
+.price {
+    color: var(--neon-green);
+    text-shadow: 0 0 3px rgba(74, 222, 128, 0.2);
+    font-size: 3rem;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.register-btn {
+    background-color: rgba(0, 0, 0, 0.2); /* Increased opacity for better visibility */
+    color: #000(--neon-green);
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3); /* Increased glow */
+    transition: all 0.3s ease;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 10px 25px;
+    display: block;
+    margin: 15px auto 0;
+    width: fit-content;
+}
+
+.register-btn:hover {
+    background-color: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Apply subtle neon effect to navigation */
+nav ul li a {
+    color: var(--neon-green);
+    text-shadow: 0 0 2px rgba(74, 222, 128, 0.2);
+    font-weight: bold;
+    position: relative;
+    padding: 8px 15px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--neon-green);
+    box-shadow: 0 0 2px rgba(74, 222, 128, 0.2);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #fff;
+    text-shadow: 0 0 3px rgba(74, 222, 128, 0.3);
+}
+
+nav ul li a:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Apply subtle neon effect to buttons */
+.btn-primary {
+    background-color: rgba(74, 222, 128, 0.2); /* Increased opacity for better visibility */
+    color: #000(--neon-green);
+    border: 2px solid var(--neon-green);
+    box-shadow: 0 0 5px rgba(74, 222, 128, 0.3); /* Increased glow */
+    transition: all 0.3s ease;
+    font-weight: bold;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(74, 222, 128, 0.1), transparent);
+    z-index: -1;
+    animation: neonSweep 3s infinite;
+}
+
+.btn-primary:hover {
+    background-color: var(--neon-green);
+    color: #000;
+    box-shadow: 0 0 8px rgba(74, 222, 128, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Subtle neon pulse animation */
+@keyframes neonPulse {
+    0% {
+        opacity: 1;
+        box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    }
+    50% {
+        opacity: 0.7;
+        box-shadow: 0 0 3px rgba(74, 222, 128, 0.2);
+    }
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 5px rgba(74, 222, 128, 0.3);
+    }
+}
+
+/* Enhanced neon glow for stat numbers during animation */
+.stat-number.updating {
+    color: #fff !important;
+    text-shadow: 0 0 5px var(--neon-green),
+                 0 0 10px var(--neon-green),
+                 0 0 15px var(--neon-green) !important;
+}
+
+.neon-pulse {
+    animation: neonPulse 2s infinite;
+}
+
+/* Pure black background */
+body {
+    background-color: #000000;
+    color: var(--text-light);
+}
+
+header, footer, .about-section, .guidelines-section, .timeline-section, .countdown-section, .pricing-section, .glimpses-section {
+    background-color: #000000;
+}
+
+/* Override any light mode styles with pure black */
+:root {
+    --bg-primary: #000000 !important;
+    --bg-secondary: #000000 !important;
+    --text-primary: var(--text-light) !important;
+    --text-secondary: var(--text-light-secondary) !important;
+    --accent-color: var(--neon-green) !important;
+    --accent-hover: var(--neon-dark-green) !important;
+    --accent-glow: rgba(57, 255, 20, 0.5) !important;
+    --card-bg: #000000 !important;
+}
+
+/* Hide theme toggle button since we're always in dark mode */
+.theme-toggle {
+    display: none !important;
+}
+
+/* Removed grid lines in the background */
+.hero::before {
+    display: none;
+}
+
+/* Removed circuit patterns from sections */
+.about-section, .guidelines-section, .timeline-section, .countdown-section, .pricing-section {
+    position: relative;
+    overflow: hidden;
+    background-color: #000000;
+}
+
+.about-section::before, .guidelines-section::before, .timeline-section::before,
+.countdown-section::before, .pricing-section::before {
+    display: none;
+}
+
+/* Subtle neon signal wave */
+.signal-wave {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg,
+        transparent,
+        #000(--neon-green),
+        #000(--neon-green),
+        transparent
+    );
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+    opacity: 0.5;
+    animation: waveFlow 3s infinite linear;
+}
+
+@keyframes waveFlow {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+/* Removed glow and grid patterns */
+body::after, body::before {
+    display: none;
+}
