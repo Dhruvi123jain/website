@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hack The Signals - IEEE Signal Processing Society</title>
+
+    <!--
+    ==============================================
+    FILE STRUCTURE AND CONNECTIONS:
+    ==============================================
+    This is the main HTML file (index.html) that loads:
+
+    CSS FILES:
+    - styles.css: Main styling for the entire website
+    - neon-effects.css: Dark theme with neon green effects
+    - animations.css: Animation keyframes and classes (loaded by animations.js)
+
+    JAVASCRIPT FILES:
+    - script.js: Main functionality (theme toggle, countdown, carousel)
+    - animations.js: Handles animations and effects
+    - cursor.js: Custom cursor functionality for desktop
+
+    ALTERNATIVE FILES:
+    - basic.html + basic.css: Simplified version without animations
+    - script-simple.js + styles-simple.css: Simplified scripts and styles
+    ==============================================
+    -->
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" as="style" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" />
+    <link rel="preload" href="styles.css" as="style" />
+    <link rel="preload" href="script.js" as="script" />
+
+    <!-- Load stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="neon-effects.css" />
+    <link rel="stylesheet" href="neon-cursor.css" />
+    <link rel="stylesheet" href="registration.css" />
+    <link rel="stylesheet" href="white-screen.css" />
+
+    <!-- Optimize rendering -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#4CAF50">
+</head>
+<body>
+    <!-- Neon cursor background effect -->
+    <div id="app"></div>
+
+    <!-- Direct registration button (always visible) -->
+    <!-- <div style="position: fixed; top: 20px; right: 20px; z-index: 9999;">
+        <button id="floating-register-btn" class="btn btn-primary" style="padding: 10px 20px; font-weight: bold;">
+            Register Now
+        </button>
+    </div> -->
+
+    <script>
+        // Ensure the floating button works immediately
+        document.getElementById('floating-register-btn').addEventListener('click', function() {
+            console.log('Floating register button clicked');
+            const modal = document.getElementById('registration-modal');
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                }, 10);
+            }
+        });
+    </script>
+
+    <!-- Page content -->
+
+    <div class="announcement-bar">
+        <div class="container">
+            <p><i class="fas fa-calendar-alt"></i> September 1-2, 2025 | <i class="fas fa-map-marker-alt"></i> Silver Oak University</p>
+            <div class="theme-toggle">
+                <button id="theme-toggle-btn" aria-label="Toggle dark mode">
+                    <i class="fas fa-sun light-icon"></i>
+                    <i class="fas fa-moon dark-icon"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="http://ieee.socet.edu.in/wp-content/uploads/2025/04/IEEE-New-Logo-White.png" alt="logo" width="180" style="height:auto;">
+                    
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#Home">Home</a></li>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#Speakers">Speakers</a></li>
+                    <li><a href="#Schedule">Schedule</a></li>
+                    <li><a href="#Guidelines">Guidelines</a></li>
+                    <li><a href="#Sponsors">Sponsors</a></li>
+                    <li><a href="#Contact">Contact</a></li>
+
+                </ul>
+
+            </nav>
+            <div class="header-cta">
+                <a href="#register" class="btn btn-primary">Register Now</a>
+            </div>
+            <div class="header-cta" style="position: absolute; top: 1.5px; right: -85px; z-index: 1000;">
+                <a href="admin.html" class="btn btn-outline btn-sm"     border: 2px solid var(--neon-green);
+                border-top-width: 2px;
+                border-right-width: 2px;
+                border-bottom-width: 2px;
+                border-left-width: 2px;
+                border-top-style: solid;
+                border-right-style: solid;
+                border-bottom-style: solid;
+                border-left-style: solid;
+                border-top-color: initial;
+                border-right-color: initial;
+                border-bottom-color: initial;
+                border-left-color: initial;
+                border-image-source: initial;
+                border-image-slice: initial;
+                border-image-width: initial;
+                border-image-outset: initial;
+                border-image-repeat: initial;">Admin</a>
+                <!-- <button id="direct-register-btn" class="btn btn-primary btn-sm" style="font-size: 0.8rem; padding: 5px 10px;">Register Now</button> -->
+            </div>
+        </div>
+    </header>
+
+    <section id="Home" class="hero">
+       <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="event-badge">24-Hour Hackathon</div>
+                    <h1 class="neon-text typing-glitch-container">
+                        <!-- Removed typing effect, keeping only glitch effect -->
+                        <span class="typing-glitch-effect" data-text="HACK THE SIGNALS">HACK THE <span class="accent">SIGNALS</span></span>
+                        <!-- Cursor removed as it's not needed without typing effect -->
+                    </h1>
+                    <h2>Crafting Future Signals with AI</h2>
+                    <p>Join the premier signal processing hackathon and collaborate with industry experts to solve real-world challenges using cutting-edge AI technologies.</p>
+                    <div class="hero-cta">
+                        <a href="#register" class="btn btn-primary btn-lg neon-btn">Register Now</a>
+                        <a href="#About" class="btn btn-outline btn-lg neon-btn">Learn More</a>
+                    </div>
+                    <div class="hero-stats">
+    <div class="stat-item" style="display: flex; flex-direction: row; align-items: center; gap: 12px;">
+        <span class="stat-label" style="font-size: 1.7rem; font-weight: 700; color: #4caf50; letter-spacing: 1px;">Prize Pool</span>
+        <span class="stat-number" style="font-size: 2.6rem; font-weight: bold;">₹80K</span>
+    </div>
+</div>
+                </div>
+                <div class="hero-image">
+                    <img src="http://ieee.socet.edu.in/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-21-at-142741_d8f2b30a-removebg-preview-Picsart-AiImageEnhancer-1-1.png" alt="Hack The Signals"; width="230"; height="170">
+                    <div class="hero-sponsors">
+                        <span>Organized by:</span>
+                        <div class="sponsor-logos">
+                            <img src="http://ieee.socet.edu.in/wp-content/uploads/2025/05/IEEE-SPS-SOU-SBC-White.png" alt="IEEE SPS" width="90" style="height:auto;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="currentColor" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,149.3C960,160,1056,160,1152,138.7C1248,117,1344,75,1392,53.3L1440,32L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+        </div>
+    </section>
+
+    <section id="About" class="about-section">
+        <h2 class="section-title glitch-effect" data-text="HACK THE SIGNALS">HACK THE SIGNALS</h2>
+        <div class="about-content">
+            <p style="text-align: justify;">
+                Get ready for Hack The Signals, the ultimate 24-hour AI Signal Processing hackathon brought to you by IEEE Computer Society and Signal Processing Society College of Engineering. We challenge you to tackle innovative and sustainable solutions for cutting-edge AI and Signal Processing hurdles. Hack The Signals is more than just a 2-day event — it’s a complete experience. Here you can dive into brainstorming sessions, panel discussions, and hands-on expert sessions, all in one place. Don’t miss this chance to network with industry leaders, AI pioneers, and fellow enthusiasts in an exciting and high-energy environment. Meet new friends and mentors, make great connections, and learn new skills and perspectives. No matter if you’ve never tried solving problems before, you’ll step out transformed and inspired. Join us at Hack The Signals and be part of something truly transformative.
+            </p>
+        </div>
+        <div class="signal-wave"></div>
+    </section>
+
+    <!-- Glimpses of Previous Hackathon Section with Images -->
+<section id="Glimpses" class="glimpses-section">
+        <h2 class="section-title">Glimpses of Previous Hackathon</h2>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Hackathon Image 1">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Hackathon Image 2">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Hackathon Image 3">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Hackathon Image 4">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="Hackathon Image 5">
+                </div>
+            </div>
+            <button class="carousel-prev">Previous</button>
+            <button class="carousel-next">Next</button>
+        </div>
+    </section>
+
+    <section id="countdown" class="countdown-section">
+        <h2 class="section-title">Hurry Up!</h2>
+        <!-- Add a "Months" box to the countdown timer UI -->
+        <div class="countdown-timer">
+            <div class="time-box neon-border neon-pulse">
+                <span id="months" class="time-number">00</span>
+                <span class="time-label">Months</span>
+            </div>
+            <div class="time-box neon-border neon-pulse">
+                <span id="days" class="time-number">00</span>
+                <span class="time-label">Days</span>
+            </div>
+            <div class="time-box neon-border neon-pulse">
+                <span id="hours" class="time-number">00</span>
+                <span class="time-label">Hours</span>
+            </div>
+            <div class="time-box neon-border neon-pulse">
+                <span id="minutes" class="time-number">00</span>
+                <span class="time-label">Minutes</span>
+            </div>
+            <div class="time-box neon-border neon-pulse">
+                <span id="seconds" class="time-number">00</span>
+                <span class="time-label">Seconds</span>
+            </div>
+        </div>
+        <div class="signal-wave"></div>
+    </section>
+
+    <!-- Registration Cards Section -->
+    <section id="register" class="pricing-section">
+        <h2 class="section-title">Registration Open</h2>
+        <div class="pricing-cards">
+            <div class="pricing-card neon-border">
+                <h3>SPS Member</h3>
+                <p>Price applicable only if you are an IEEE Signal Processing Society (SPS) Member</p>
+                <p class="price">₹499</p>
+                <a href="#" class="register-btn neon-btn" data-membership="SPS Member" data-price="₹499">Register Now</a>
+            </div>
+            <div class="pricing-card neon-border">
+                <h3>IEEE Member</h3>
+                <p>Price applicable only if you are a IEEE Member</p>
+                <p class="price">₹699</p>
+                <a href="#" class="register-btn neon-btn" data-membership="IEEE Member" data-price="₹699">Register Now</a>
+            </div>
+            <div class="pricing-card neon-border">
+                <h3>NON-IEEE Member</h3>
+                <p>Price applicable if you are not an IEEE Member</p>
+                <p class="price">₹899</p>
+                <a href="#" class="register-btn neon-btn" data-membership="NON-IEEE Member" data-price="₹899">Register Now</a>
+            </div>
+        </div>
+        <div class="signal-wave"></div>
+    </section>
+
+    <section id="Guidelines" class="guidelines-section">
+        <h2 class="section-title">Guidelines for the Hackathon</h2>
+        <ul class="guidelines-list">
+            <li>Be at the Registration Desk by 9 AM sharp.</li>
+            <li>Bring a valid ID card.</li>
+            <li>Bring a valid copy of your IEEE, Computer Society, and Signal Processing Society membership - provide your membership card depending on membership category.</li>
+            <li>Each team must consist of 2 to 4 members.</li>
+            <li>Every team must have a unique team name.</li>
+            <li>A cloakroom will be provided inside the venue; however, the organizers won’t be held responsible for any lost wallets, ornaments, etc.</li>
+            <li>Mentoring sessions will take place on August 31st.</li>
+            <li>The hackathon kicks off at 9:00 PM on August 31st.</li>
+            <li>The Problem Statement will be revealed before the hackathon begins.</li>
+            <li>Teams must stop coding when the time is up but can debug and make minor fixes. Adding new features or making significant changes after that is not permitted.</li>
+            <li>Fresh-up rooms will be available on the second day.</li>
+            <li>No refunds will be processed after payment.</li>
+            <li>Don’t leave the premises without valid consent from event coordinators.</li>
+        </ul>
+        <div class="signal-wave"></div>
+    </section>
+
+    <section id="Schedule" class="timeline-section">
+        <h2 class="section-title">24-Hour Hackathon Timeline</h2>
+        <div class="timeline">
+            <div class="timeline-day">
+                <h3>DAY 1: September 1st 2025</h3>
+                <div class="timeline-item" data-hour="1">
+                    <div class="timeline-time">1:00 PM</div>
+                    <div class="timeline-content">Registration & Check-in</div>
+                </div>
+                <div class="timeline-item" data-hour="2">
+                    <div class="timeline-time">2:00 PM</div>
+                    <div class="timeline-content">HACKATHON BEGINS!</div>
+                    <div class="timeline-content">Opening Ceremony</div>
+                </div>
+                <div class="timeline-item" data-hour="3">
+                    <div class="timeline-time">3:00 PM</div>
+                    <div class="timeline-content">Problem Statement Reveal & Team Formation</div>
+                </div>
+                <div class="timeline-item" data-hour="4">
+                    <div class="timeline-time">4:00 PM</div>
+                    <div class="timeline-content">Workshop: "Signal Processing Fundamentals"</div>
+                </div>
+                <div class="timeline-item" data-hour="5">
+                    <div class="timeline-time">5:00 PM</div>
+                    <div class="timeline-content">Mentor Matching & Strategy Session</div>
+                </div>
+                <div class="timeline-item" data-hour="6">
+                    <div class="timeline-time">6:00 PM</div>
+                    <div class="timeline-content">Dinner Break</div>
+                </div>
+                <div class="timeline-item" data-hour="7">
+                    <div class="timeline-time">7:00 PM</div>
+                    <div class="timeline-content">Mini-Workshop: "AI Tools for Signal Processing"</div>
+                </div>
+                <div class="timeline-item" data-hour="8">
+                    <div class="timeline-time">8:00 PM</div>
+                    <div class="timeline-content">First Check-in with Mentors</div>
+                </div>
+                <div class="timeline-item" data-hour="9">
+                    <div class="timeline-time">9:00 PM</div>
+                    <div class="timeline-content">Coding Session & Team Collaboration</div>
+                </div>
+                <div class="timeline-item" data-hour="10">
+                    <div class="timeline-time">10:00 PM</div>
+                    <div class="timeline-content">Energy Boosters & Snacks</div>
+                </div>
+                <div class="timeline-item" data-hour="11">
+                    <div class="timeline-time">11:00 PM</div>
+                    <div class="timeline-content">Late Night Coding Session</div>
+                </div>
+                <div class="timeline-item" data-hour="12">
+                    <div class="timeline-time">12:00 AM</div>
+                    <div class="timeline-content">Midnight Challenge with Prizes</div>
+                </div>
+            </div>
+            <div class="timeline-day">
+                <h3>DAY 2: September 2nd 2025</h3>
+                <div class="timeline-item" data-hour="13">
+                    <div class="timeline-time">1:00 AM</div>
+                    <div class="timeline-content">Coding Marathon Continues</div>
+                </div>
+                <div class="timeline-item" data-hour="14">
+                    <div class="timeline-time">2:00 AM</div>
+                    <div class="timeline-content">Coffee & Snacks Break</div>
+                </div>
+                <div class="timeline-item" data-hour="15">
+                    <div class="timeline-time">3:00 AM</div>
+                    <div class="timeline-content">Surprise Mini-Challenge</div>
+                </div>
+                <div class="timeline-item" data-hour="16">
+                    <div class="timeline-time">4:00 AM</div>
+                    <div class="timeline-content">Quick Yoga & Stretching Session</div>
+                </div>
+                <div class="timeline-item" data-hour="17">
+                    <div class="timeline-time">5:00 AM</div>
+                    <div class="timeline-content">Early Bird Coding Session</div>
+                </div>
+                <div class="timeline-item" data-hour="18">
+                    <div class="timeline-time">6:00 AM</div>
+                    <div class="timeline-content">Sunrise Breakfast</div>
+                </div>
+                <div class="timeline-item" data-hour="19">
+                    <div class="timeline-time">7:00 AM</div>
+                    <div class="timeline-content">Second Check-in with Mentors</div>
+                </div>
+                <div class="timeline-item" data-hour="20">
+                    <div class="timeline-time">8:00 AM</div>
+                    <div class="timeline-content">Workshop: "Presentation Skills"</div>
+                </div>
+                <div class="timeline-item" data-hour="21">
+                    <div class="timeline-time">9:00 AM</div>
+                    <div class="timeline-content">Project Refinement & Testing</div>
+                </div>
+                <div class="timeline-item" data-hour="22">
+                    <div class="timeline-time">10:00 AM</div>
+                    <div class="timeline-content">Final Mentor Check-in</div>
+                </div>
+                <div class="timeline-item" data-hour="23">
+                    <div class="timeline-time">11:00 AM</div>
+                    <div class="timeline-content">Lunch Break</div>
+                </div>
+                <div class="timeline-item" data-hour="24">
+                    <div class="timeline-time">12:00 PM</div>
+                    <div class="timeline-content">Final Push - 2 Hours Remaining!</div>
+                </div>
+                <div class="timeline-item" data-hour="25">
+                    <div class="timeline-time">1:00 PM</div>
+                    <div class="timeline-content">Prepare Presentations & Demos</div>
+                </div>
+                <div class="timeline-item " data-hour="26">
+                    <div class="timeline-time">2:00 PM</div>
+                    <div class="timeline-content">🏁 CODING ENDS! Submit Your Projects</div>
+                </div>
+                <div class="timeline-item" data-hour="27">
+                    <div class="timeline-time">2:30 PM - 4:00 PM</div>
+                    <div class="timeline-content">Project Presentations & Judging</div>
+                </div>
+                <div class="timeline-item " data-hour="28">
+                    <div class="timeline-time">4:30 PM - 5:30 PM</div>
+                    <div class="timeline-content">🏆 Awards Ceremony & Closing Remarks</div>
+                </div>
+            </div>
+        </div>
+        <div class="signal-wave"></div>
+    </section>
+
+    <footer id="Contact">
+        <div class="footer-container" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; max-width: 1200px; margin: 0 auto; padding: 40px 20px 20px 20px;">
+            <!-- Menu Section -->
+            <div class="footer-column" style="flex: 1 1 180px; min-width: 180px;">
+                <h3>Menu</h3>
+                <ul>
+                    <li><a href="#About">About</a></li>
+                    <li><a href="#register">Registration</a></li>
+                    <li><a href="#Schedule">Schedule</a></li>
+                    <li><a href="#Guidelines">Guidelines</a></li>
+                </ul>
+            </div>
+            <!-- Useful Links Section -->
+            <div class="footer-column" style="flex: 1 1 180px; min-width: 180px;">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="https://www.javatpoint.com/artificial-intelligence-tutorial" target="_blank">AI Tutorial</a></li>
+                    <li><a href="https://medium.datadriveninvestor.com/8-awesome-ai-websites-you-probably-didnt-know-existed-debede68e6a0" target="_blank">AI Useful Websites</a></li>
+                    <li><a href="https://vitbhopal.ac.in/aistudy-materials/" target="_blank">AI Study Materials</a></li>
+                </ul>
+            </div>
+            <!-- Social Media Section -->
+            <div class="footer-column" style="flex: 1 1 180px; min-width: 180px;">
+                <h3>Social Media</h3>
+                <div class="social-icons" style="display: flex; gap: 16px; margin-bottom: 10px;">
+                    <a href="https://www.instagram.com/ieee_silveroakuni/" target="_blank" aria-label="Instagram"
+                       style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent;">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg"
+                             alt="Instagram"
+                             style="width:28px;height:28px;object-fit:contain;display:block;filter: brightness(0) invert(1);">
+                    </a>
+                    <a href="https://www.linkedin.com/company/ieee-silveroakuni/posts/?feedView=all" target="_blank" aria-label="LinkedIn"
+                       style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent;">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg"
+                             alt="LinkedIn"
+                             style="width:28px;height:28px;object-fit:contain;display:block;filter: brightness(0) invert(1);">
+                    </a>
+                    <a href="https://x.com/IEEE_SilverOak" target="_blank" aria-label="X"
+                       style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent;">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/x.svg"
+                             alt="X"
+                             style="width:28px;height:28px;object-fit:contain;display:block;filter: brightness(0) invert(1);">
+                    </a>
+                    <!-- Website icon -->
+                    <a href="https://ieee.socet.edu.in/" target="_blank" aria-label="Website"
+                       style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent;">
+                        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/internetexplorer.svg"
+                             alt="Website"
+                             style="width:28px;height:28px;object-fit:contain;display:block;filter: brightness(0) invert(1);">
+                    </a>
+                </div>
+            </div>
+            <!-- Contact Section -->
+            <div class="footer-column" style="flex: 1 1 220px; min-width: 220px;">
+                <h3>Contact Us</h3>
+                <ul class="contact-list">
+                    <li>IEEE SB Silver Oak University</li>
+                    <li><a href="https://ieee.socet.edu.in/" target="_blank">IEEE SOU SB</a></li>
+                    <li>Tanuj: <a href="tel:+919377849778">+91 9377849778</a></li>
+                    <li>Sujal: <a href="tel:+918758055599">+91 8758055599</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align: center; padding: 16px 0 0 0; font-size: 1rem; color: #aaa;">
+            <p>Copyright © IEEE SOU SB</p>
+        </div>
+    </footer>
+
+    <!-- Load scripts with defer to improve page load performance -->
+    <script src="script.js" defer></script>
+    <script src="cursor.js" defer></script>
+
+    <!-- Firebase scripts (type="module" is required for ES6 imports) -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="database-service.js"></script>
+    <script type="module" src="simple-registration.js"></script>
+    <script type="module" src="db-checker.js"></script>
+
+    <!-- Direct form handler (non-module for direct DOM access) -->
+    <script src="direct-form-handler.js"></script>
+
+    <!-- Neon cursor effect script (type="module" is required for ES6 imports) -->
+    <script type="module" src="neon-cursor.js"></script>
+
+    <!-- Admin dashboard link (visible only to admins) -->
+
+
+    <script>
+        // Direct registration button
+        document.addEventListener('DOMContentLoaded', function() {
+            const directRegisterBtn = document.getElementById('direct-register-btn');
+            if (directRegisterBtn) {
+                directRegisterBtn.addEventListener('click', function() {
+                    console.log('Direct register button clicked');
+                    const modal = document.getElementById('registration-modal');
+                    if (modal) {
+                        modal.style.display = 'flex';
+                        modal.classList.add('active');
+                        setTimeout(() => {
+                            modal.style.opacity = '1';
+                        }, 10);
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Registration Modal -->
+    <div id="registration-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="document.getElementById('registration-modal').style.display='none';">&times;</span>
+            <h2 class="modal-title">Register for Hack The Signals</h2>
+            <div id="membership-type" class="membership-type">SPS Member</div>
+            <!-- Only keep this for the price -->
+            <div id="selected-plan-card" class="selected-plan-card">
+                <h4 id="selected-plan-title">SPS Member</h4>
+                <div id="selected-plan-price" class="selected-plan-price">₹499</div>
+            </div>
+
+            <form id="registration-form" class="registration-form" onsubmit="return false;">
+                <!-- Personal Information Section -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="first-name" class="required-field">First Name</label>
+                        <input type="text" id="first-name" name="first-name" required>
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="last-name" class="required-field">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" required>
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="required-field">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="focus-border"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="required-field">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    <span class="focus-border"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="college" class="required-field">College/University</label>
+                    <input type="text" id="college" name="college" required>
+                    <span class="focus-border"></span>
+                </div>
+
+                <!-- Membership Section -->
+                <div class="form-section">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ieee-membership" class="required-field">IEEE Membership Number</label>
+                            <input type="text" id="ieee-membership" name="ieee-membership" placeholder="Leave blank if not a member">
+                            <span class="focus-border"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="membership-type-select" class="required-field">Membership Type</label>
+                            <select id="membership-type-select" name="membership-type" required>
+                                <option value="cs-sps">IEEE CS/SPS Member</option>
+                                <option value="ieee">IEEE Member</option>
+                                <option value="non-ieee">Non-IEEE Member</option>
+                            </select>
+                            <span class="focus-border"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Information Section -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="team-name" class="required-field">Team Name</label>
+                        <input type="text" id="team-name" name="team-name" required>
+                        <span class="focus-border"></span>
+                        <span class="form-note">Each team must consist of 2 to 4 members</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="team-members">Team Members (Email addresses, comma separated)</label>
+                        <textarea id="team-members" name="team-members" placeholder="Enter email addresses of your team members"></textarea>
+                        <span class="focus-border"></span>
+                        <span class="form-note">All team members must register separately</span>
+                    </div>
+                </div>
+
+                <!-- Additional Information Section -->
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="experience-level" class="required-field">Experience Level</label>
+                        <select id="experience-level" name="experience-level" required>
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <span class="focus-border"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dietary-restrictions">Dietary Restrictions</label>
+                        <input type="text" id="dietary-restrictions" name="dietary-restrictions" placeholder="Any dietary restrictions or preferences">
+                        <span class="focus-border"></span>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="document.getElementById('registration-form').dispatchEvent(new Event('submit', {bubbles: true, cancelable: true}))">Complete Registration</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const registerBtns = document.querySelectorAll('.register-btn[data-membership]');
+    const modal = document.getElementById('registration-modal');
+    const membershipType = document.getElementById('membership-type');
+    const membershipSelect = document.getElementById('membership-type-select');
+    // New: Get the highlight card elements
+    const selectedPlanTitle = document.getElementById('selected-plan-title');
+    const selectedPlanPrice = document.getElementById('selected-plan-price');
+
+    registerBtns.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Set membership type and price in modal
+            const type = btn.getAttribute('data-membership');
+            const price = btn.getAttribute('data-price');
+            if (membershipType) membershipType.textContent = type;
+            if (membershipSelect) {
+                if (type === 'IEEE CS/SPS Member') membershipSelect.value = 'cs-sps';
+                else if (type === 'IEEE Member') membershipSelect.value = 'ieee';
+                else membershipSelect.value = 'non-ieee';
+            }
+            // Update the highlight card
+            if (selectedPlanTitle) selectedPlanTitle.textContent = type;
+            if (selectedPlanPrice) selectedPlanPrice.textContent = price;
+            // Show modal
+            if (modal) {
+                modal.style.display = 'flex';
+                modal.classList.add('active');
+                setTimeout(() => {
+                    modal.style.opacity = '1';
+                }, 10);
+            }
+        });
+    });
+});
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const statNumbers = document.querySelectorAll('.hero-stats .stat-number');
+    const targets = [80000]; // Only ₹80K
+
+    statNumbers.forEach((el, i) => {
+        let start = 0;
+        let end = targets[i];
+        let duration = 1500;
+        let step = Math.ceil(end / (duration / 30));
+        let current = start;
+
+        function update() {
+            if (current < end) {
+                current += step;
+                if (current > end) current = end;
+                el.textContent = `₹${current.toLocaleString()}`;
+                setTimeout(update, 30);
+            } else {
+                el.textContent = `₹${end.toLocaleString()}`;
+            }
+        }
+        update();
+    });
+});
+    </script>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Set your event date and time here (YYYY-MM-DDTHH:MM:SS)
+    const eventDate = new Date('2025-09-01T13:00:00'); // 1st Sept 2025, 1:00 PM
+
+    function updateCountdown() {
+        const now = new Date();
+        let diff = eventDate - now;
+
+        if (diff <= 0) {
+            document.getElementById('months').textContent = '00';
+            document.getElementById('days').textContent = '00';
+            document.getElementById('hours').textContent = '00';
+            document.getElementById('minutes').textContent = '00';
+            document.getElementById('seconds').textContent = '00';
+            return;
+        }
+
+        // Calculate months and days
+        let months = (eventDate.getFullYear() - now.getFullYear()) * 12 + (eventDate.getMonth() - now.getMonth());
+        let tempDate = new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+        if (tempDate > eventDate) {
+            months--;
+            tempDate = new Date(now.getFullYear(), now.getMonth() + months, now.getDate(), now.getHours(), now.getMinutes(), now.getSeconds());
+        }
+        let days = Math.floor((eventDate - tempDate) / (1000 * 60 * 60 * 24));
+
+        // Remaining time after months and days
+        let remainder = eventDate - tempDate - days * 24 * 60 * 60 * 1000;
+        let hours = Math.floor(remainder / (1000 * 60 * 60));
+        remainder -= hours * 60 * 60 * 1000;
+        let minutes = Math.floor(remainder / (1000 * 60));
+        let seconds = Math.floor((remainder % (1000 * 60)) / 1000);
+
+        // Update countdown elements
+        document.getElementById('months').textContent = String(months).padStart(2, '0');
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    // Initial countdown update
+    updateCountdown();
+    // Update countdown every second
+    setInterval(updateCountdown, 1000);
+});
+    </script>
+</body>
+</html>
