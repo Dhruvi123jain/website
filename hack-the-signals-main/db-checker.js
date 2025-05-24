@@ -202,28 +202,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     const results = await runAllChecks();
     console.log("Database connection check results:", results);
     
-    // Add a small indicator to the page
-    const indicator = document.createElement('div');
-    indicator.style.position = 'fixed';
-    indicator.style.bottom = '10px';
-    indicator.style.left = '10px';
-    indicator.style.padding = '5px 10px';
-    indicator.style.borderRadius = '4px';
-    indicator.style.fontSize = '12px';
-    indicator.style.fontFamily = 'monospace';
-    indicator.style.zIndex = '9999';
+    // Comment out or remove the indicator code
+    // const indicator = document.createElement('div');
+    // indicator.style.position = 'fixed';
+    // indicator.style.bottom = '10px';
+    // indicator.style.left = '10px';
+    // indicator.style.padding = '5px 10px';
+    // indicator.style.borderRadius = '4px';
+    // indicator.style.fontSize = '12px';
+    // indicator.style.fontFamily = 'monospace';
+    // indicator.style.zIndex = '9999';
     
-    if (results.initialized && results.firestoreConnection.success) {
-        indicator.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
-        indicator.style.color = '#4ade80';
-        indicator.style.border = '1px solid #4ade80';
-        indicator.textContent = '✓ DB Connected';
-    } else {
-        indicator.style.backgroundColor = 'rgba(255, 77, 77, 0.2)';
-        indicator.style.color = '#ff4d4d';
-        indicator.style.border = '1px solid #ff4d4d';
-        indicator.textContent = '✗ DB Error';
-    }
+    // if (results.initialized && results.firestoreConnection.success) {
+    //     indicator.style.backgroundColor = 'rgba(74, 222, 128, 0.2)';
+    //     indicator.style.color = '#4ade80';
+    //     indicator.style.border = '1px solid #4ade80';
+    //     indicator.textContent = '✓ DB Connected';
+    // } else {
+    //     indicator.style.backgroundColor = 'rgba(255, 77, 77, 0.2)';
+    //     indicator.style.color = '#ff4d4d';
+    //     indicator.style.border = '1px solid #ff4d4d';
+    //     indicator.textContent = '✗ DB Error';
+    // }
     
-    document.body.appendChild(indicator);
+    // document.body.appendChild(indicator);
 });
