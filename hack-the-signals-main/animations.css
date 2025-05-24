@@ -1,0 +1,225 @@
+/*
+==============================================
+FILE: animations.css
+==============================================
+DESCRIPTION:
+Contains all animation keyframes and animation classes for the website.
+Provides professional animations for various elements and interactions.
+
+CONNECTIONS:
+- Not directly loaded in HTML but used by animations.js
+- Works with styles.css and neon-effects.css
+- Animations are applied by JavaScript in animations.js and script.js
+- Some animations are triggered on scroll, others on page load
+
+SECTIONS IN THIS FILE:
+1. Basic animations (fade, slide, scale)
+2. Special effects (pulse, shimmer, wave)
+3. Animation utility classes
+4. Timeline-specific animations
+5. Scroll animations
+6. Mobile optimizations
+==============================================
+*/
+
+/* Professional Animations for Hack The Signals Website */
+
+/* Fade In Animation */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Slide In Left Animation */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Slide In Right Animation */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Scale In Animation */
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+    0% { background-position: -100% 0; }
+    100% { background-position: 100% 0; }
+}
+
+/* Signal Wave Animation */
+@keyframes signalWave {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Animated Elements */
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.animate-slide-up {
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+}
+
+.animate-slide-left {
+    opacity: 0;
+    animation: slideInLeft 0.8s ease forwards;
+}
+
+.animate-slide-right {
+    opacity: 0;
+    animation: slideInRight 0.8s ease forwards;
+}
+
+.animate-scale-in {
+    opacity: 0;
+    animation: scaleIn 0.8s ease forwards;
+}
+
+.animate-pulse {
+    animation: pulse 2s ease infinite;
+}
+
+/* Animation Delays */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+.delay-600 {
+    animation-delay: 0.6s;
+}
+
+.delay-700 {
+    animation-delay: 0.7s;
+}
+
+.delay-800 {
+    animation-delay: 0.8s;
+}
+
+/* Signal Wave Effect */
+.signal-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg,
+        var(--accent-color),
+        var(--accent-hover),
+        var(--accent-color),
+        var(--accent-hover));
+    background-size: 200% 100%;
+    animation: signalWave 10s linear infinite;
+    opacity: 0.3;
+}
+
+/* Shimmer Effect */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Timeline Animation */
+.timeline-item {
+    opacity: 1; /* Make timeline items visible by default */
+    transform: translateY(0); /* No transform by default */
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Disable animations for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .animate-slide-left,
+    .animate-slide-right {
+        animation: slideUp 0.8s ease forwards;
+    }
+}

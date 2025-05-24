@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard - Hack The Signals</title>
+
+    <!-- Load stylesheets -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="neon-effects.css" />
+    <link rel="stylesheet" href="admin.css" />
+
+    <!-- Optimize rendering -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#4CAF50">
+</head>
+<body>
+    <!-- Background -->
+    <div id="app"></div>
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="logo">
+                <a href="./index.html">
+                    <img src="http://ieee.socet.edu.in/wp-content/uploads/2025/04/Group-1.png" alt="IEEE Logo" />
+                </a>
+                <h1>Admin Dashboard</h1>
+            </div>
+            <div class="admin-nav">
+                <button id="logout-btn" class="btn btn-outline">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Login Section (shown when not logged in) -->
+    <section id="login-section" class="login-section">
+        <div class="container">
+            <div class="login-container">
+                <h2 class="section-title">Admin Login</h2>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div id="login-error" class="error-message"></div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section (shown when logged in) -->
+    <section id="dashboard-section" class="dashboard-section hidden">
+        <div class="container">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <h3>Total Registrations</h3>
+                    <div class="stat-value" id="total-registrations">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>CS/SPS Members</h3>
+                    <div class="stat-value" id="cs-sps-members">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>IEEE Members</h3>
+                    <div class="stat-value" id="ieee-members">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Non-IEEE Members</h3>
+                    <div class="stat-value" id="non-ieee-members">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Teams</h3>
+                    <div class="stat-value" id="unique-teams">0</div>
+                </div>
+            </div>
+
+            <div class="dashboard-controls">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="Search by name, email, or team...">
+                    <button id="search-btn" class="btn btn-primary">Search</button>
+                </div>
+                <div class="filter-container">
+                    <select id="filter-select">
+                        <option value="all">All Registrations</option>
+                        <option value="cs-sps">CS/SPS Members</option>
+                        <option value="ieee">IEEE Members</option>
+                        <option value="non-ieee">Non-IEEE Members</option>
+                    </select>
+                </div>
+                <button id="export-btn" class="btn btn-outline">Export CSV</button>
+            </div>
+
+            <div class="registrations-container">
+                <h2 class="section-title">Registrations</h2>
+                <div class="table-container">
+                    <table id="registrations-table" class="registrations-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>College</th>
+                                <th>Membership</th>
+                                <th>Team</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="registrations-body">
+                            <!-- Registration rows will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+                <div id="no-results" class="no-results hidden">
+                    <p>No registrations found.</p>
+                </div>
+                <div id="loading" class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading registrations...</p>
+                </div>
+            </div>
+
+            <div class="edit-glimpses-section" style="margin-top: 40px;">
+                <h2 class="section-title">Edit Glimpses of Previous Hackathon</h2>
+                <form id="glimpses-form">
+                    <div id="glimpses-inputs">
+                        <!-- Image URL inputs will be generated here -->
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Glimpses</button>
+                    <span id="glimpses-save-status" style="margin-left:10px;"></span>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Details Modal -->
+    <div id="details-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2 class="modal-title">Registration Details</h2>
+            <div id="registration-details" class="registration-details">
+                <!-- Details will be added here dynamically -->
+            </div>
+            <div class="modal-actions">
+                <button id="delete-registration" class="btn btn-danger">Delete Registration</button>
+                <button id="close-details" class="btn btn-outline">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase scripts -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="database-service.js"></script>
+    <script type="module" src="db-checker.js"></script>
+
+    <!-- Load scripts -->
+    <script type="module" src="neon-cursor.js"></script>
+    <script type="module" src="admin.js"></script>
+
+    <!-- Database connection status -->
+    <div id="db-status" style="position: fixed; bottom: 10px; left: 10px; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-family: monospace; z-index: 9999;"></div>
+</body>
+</html>
+
+<style>
+/* Center the login section */
+.login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.login-section .container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+</style>
